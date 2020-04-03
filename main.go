@@ -2,8 +2,8 @@ package main
 
 import (
 	"Udemy1/database"
+	"github.com/go-chi/chi"
 	_ "github.com/go-sql-driver/mysql"
-	// "github.com/go-chi/chi"
 	// "net/http"
 )
 
