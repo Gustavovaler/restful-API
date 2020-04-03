@@ -1,7 +1,7 @@
 package main
 
 import (
-	"database/sql"
+	"Udemy1/database"
 	_ "github.com/go-sql-driver/mysql"
 	// "github.com/go-chi/chi"
 	// "net/http"
@@ -13,12 +13,8 @@ import (
 
 func main() {
 
-	connection := "root:@/northwind"
-	db, err := sql.Open("mysql", connection)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
+	databaseConnection := database.InitDB()
+	defer databaseConnection.Close()
 
 	// r := chi.NewRouter()
 	// r.Get("/", index)
