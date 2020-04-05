@@ -37,7 +37,21 @@ func main() {
 	r.Get("/products", AllProductos)
 	r.Post("/products", Createproducto)
 	r.Put("/products/{id}", UpdateProducto)
+	r.Delete("/products/{id}", DeleteProducto)
 	http.ListenAndServe(":3000", r)
+}
+
+func DeleteProducto(w http.ResponseWriter, r *http.Request) {
+	id := chi.URLParam(r, "id")
+
+	query, err := databaseConnection.Prepare("delete from products where id=?")
+	catch(err)
+
+	_, er := query.Exec(id)
+	catch(er)
+
+	responseWithJSON(w, http.StatusOK, map[string]string{"message": "Successfully deleted"})
+
 }
 
 func UpdateProducto(w http.ResponseWriter, r *http.Request) {
